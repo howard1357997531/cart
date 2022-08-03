@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-light" id="item_count">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">購物網</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="search-bar">
+        <form action="{% url 'search_product' %}" method="POST">
+          {% csrf_token %}
+          <div class="input-group">
+            <input type="search" class="form-control" id="search_product" name="search_product" placeholder="搜尋商品" required>
+            <button class="input-group-text"><i class="fa fa-search"></i></button>
+          </div>
+      </form>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">  <!-- marginstart -->
+          <li class="nav-item">
+            <a class="nav-link active {% if request.resolver_match.url_name == 'home' %}navactive{% endif %}" aria-current="page" href="{% url 'home' %}">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active {% if request.resolver_match.url_name == 'collections' %}navactive{% endif %}" href="{% url 'collections' %}">商品</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active {% if request.resolver_match.url_name == 'cart' %}navactive{% endif %}" aria-current="page" href="{% url 'cart' %}">
+              購物車
+              {% if profile.cart_item_total > 0 %}
+              <span class="badge badge-pill bg-primary cart-count" style="margin-right: -3px;">{{profile.cart_item_total}}</span>
+              {% endif %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active {% if request.resolver_match.url_name == 'wishlist' %}navactive{% endif %}" aria-current="page" href="{% url 'wishlist' %}">
+              願望清單
+              {% if profile.wishlist_item_total > 0 %}
+              <span class="badge badge-pill bg-success wishlist-count" style="margin-right: -3px;">{{profile.wishlist_item_total}}</span>
+              {% endif %}
+            </a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active ints" 
+            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{request.user}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'profile' %}">基本資料</a></li>
+              <li><a class="dropdown-item" href="{% url 'my_order' %}">我的訂單</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">登出</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">登入</a>
+          </li>
+          {% endif  %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

@@ -1,0 +1,58 @@
+{% extends 'store/layouts/main.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Register{% endblock title %}
+{% block css %}
+<style>
+    label {
+        font-size: 18px;
+    }
+    .card input {
+        margin: 10px 0;
+    }
+</style>
+{% endblock css%}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow px-4 py-3">
+                <h3 class="text-center mb-3">註冊</h3>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">送出</button>
+                    </div>
+                    <div class="text-center mt-3">已有帳號?<a href="{% url 'login' %}" class="ms-3">登入</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let label = document.getElementsByTagName('label')
+    label[0].innerHTML = '帳號'
+    label[1].innerHTML = '名字'
+    label[2].innerHTML = '姓氏'
+    label[3].innerHTML = '電子郵件'
+    label[4].innerHTML = '密碼確認'
+    label[5].innerHTML = '密碼確認'
+    document.getElementById('div_id_username').className += ' mb-2'
+    document.getElementById('div_id_first_name').className += ' mb-2'
+    document.getElementById('div_id_last_name').className += ' mb-2'
+    document.getElementById('div_id_email').className += ' mb-2'
+    document.getElementById('div_id_password1').className += ' mb-2'
+    document.getElementById('div_id_password2').className += ' mb-3'
+</script>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type="">
+    {% for message in messages %}
+        alertify.success('{{message}}');
+    {% endfor %}
+</script>
+{% endblock scripts %}

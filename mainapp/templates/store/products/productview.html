@@ -1,0 +1,90 @@
+{% extends 'store/layouts/main.html' %}
+{% block title %}productview{% endblock title %}
+
+{% block content %}
+<div class="py-3 bg-info">
+    <div class="container">
+        <a class="text-white" href="{% url 'home' %}">首頁 &nbsp;/ &nbsp;</a>
+        <a class="text-white" href="{% url 'collections' %}">商品 &nbsp;/ &nbsp;</a>
+        <a class="text-white" href="{% url 'collectionsview' products.category.slug %}">{{products.category.name}} &nbsp;/ &nbsp;</a>
+        <a class="text-white" href="{% url 'productview' products.category.slug products.slug %}"> {{products.name}}</a>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow product_data">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if products.tag %}
+                                <label class="product-viewtag">{{products.tag}}</label>
+                            {% endif %}
+                            <img src="{{products.product_imageURL}}"  height="350px"  class="w-100" alt="Image">
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="mb-0">
+                                {{products.name}}
+                                {% if products.trending %}
+                                    <label style="font-size: 16px;" class="float-end badge bg-danger trending_tag"> 熱門 </label>
+                                {% endif %}
+                            </h2>
+                            <hr>
+                            <label class="me-3">原價 : <s>{{products.original_price}}</s> 元</label>
+                            <label class="fw-blod" style="color: red;">特價 : {{products.selling_price}} 元</label>
+                            <p class="mt-3">{{products.small_description}}</p>
+                            <hr>
+                            {% if products.quantity > 0 %}
+                                <h4><span class="badge bg-warning">尚有存貨</span></h4>
+                            {% else %}
+                                <h4><span class="badge bg-danger">售罄</span></h4>
+                            {% endif %}
+                            <div class="row mt-3">
+                                {% if products.quantity > 0 %}
+                                <div class="col-md-2">
+                                    {% csrf_token %}
+                                    <input type="hidden" class="prod_id" value="{{products.id}}">
+                                    <label for="Quantity" class="mb-2">數量</label>
+                                    <div class="input-group text-center mb-3" style="width: 130px;">
+                                        <button class="input-group-text decrement-btn">-</button>
+                                        <input type="text" class="form-control text-center qty-input" name="quantity" value="1">
+                                        <button class="input-group-text increment-btn">+</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="col-md-10 ">
+                                    <br>
+                                    {% if products.quantity > 0 %}
+                                        <button type="button" class="btn btn-primary ms-3 me-4 mt-2 addToCartBtn">
+                                            加入購物車 <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                    {% endif %}
+                                    {% if not hasitem_in_cart %} <!-- 如果商品在cart裡不顯示 -->
+                                    <button type="button" class="btn btn-success mt-2 addToWishlist">
+                                        加入願望清單 <i class="fa fa-heart"></i>
+                                    </button> 
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                        <h3>產品描述 : </h3>
+                        <p class="mt-3">{{products.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+
+{% block scripts %}
+<script type="">
+    {% for message in messages %}
+        alertify.success('{{message}}');
+    {% endfor %}
+</script>
+{% endblock scripts %}
