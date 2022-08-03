@@ -1,4 +1,5 @@
 {% extends 'store/layouts/main.html' %}
+{% load static %}
 {% block title %}Checkout{% endblock title %}
 {% block css %}
 <style>
@@ -43,7 +44,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label>名字</label>
-                                <input type="text" class="form-control" name="first_name" placeholder="輸入" value="{{profile.first_name}}" required>
+                                <input type="text" class="form-control" name="first_name" placeholder="輸入名字" value="{{profile.first_name}}" required>
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label>電話</label>
@@ -55,7 +56,7 @@
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label>住址</label>
-                                <input type="text" class="form-control" name="address" placeholder="輸入姓名" {% if profile.address %}value="{{profile.address}}"{% endif %} required>
+                                <input type="text" class="form-control" name="address" placeholder="輸入地址" {% if profile.address %}value="{{profile.address}}"{% endif %} required>
                             </div>
                         </div>
 
@@ -81,7 +82,7 @@
                                     {% for item in cartitems %}
                                     <tr>
                                         <td>
-                                            <img src="{{item.product.product_image.url}}" class="me-2" height="50px" width="50px" alt="Image product">
+                                            <img src="{% static item.product.product_imageURL %}" class="me-2" height="50px" width="50px" alt="Image product">
                                             <span class="ms-2" style="color: blue;">{{item.product.name}}</span>
                                         </td>
                                         <td class="text-center align-middle">{{item.product.selling_price}} 元</td>

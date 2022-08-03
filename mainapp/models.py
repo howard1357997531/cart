@@ -17,7 +17,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=150,null=True,blank=True)
     address = models.CharField(max_length=150,null=True,blank=True)
     email = models.EmailField(max_length=150,null=True,blank=True)
-    profile_image = models.ImageField(upload_to=get_profile_file_path,default='profile.jpg',null=True,blank=True)
+    profile_image = models.ImageField(upload_to=get_profile_file_path,null=True,blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
     @property
@@ -35,7 +35,7 @@ class Profile(models.Model):
         try:
             url = self.profile_image.url
         except:
-            url = ''
+            url = 'images/profile.jpg'
         return url
 
     def __str__(self):

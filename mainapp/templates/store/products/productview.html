@@ -1,4 +1,5 @@
 {% extends 'store/layouts/main.html' %}
+{% load static %}
 {% block title %}productview{% endblock title %}
 
 {% block content %}
@@ -20,7 +21,7 @@
                             {% if products.tag %}
                                 <label class="product-viewtag">{{products.tag}}</label>
                             {% endif %}
-                            <img src="{{products.product_imageURL}}"  height="350px"  class="w-100" alt="Image">
+                            <img src="{% static products.product_imageURL %}"  height="350px"  class="w-100" alt="Image">
                         </div>
                         <div class="col-md-8">
                             <h2 class="mb-0">

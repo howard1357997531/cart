@@ -1,4 +1,5 @@
 {% extends 'store/layouts/main.html' %}
+{% load static %}
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
@@ -23,7 +24,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 text-center">
-                            <img src="{% static 'images/profile.jpg' %}" width="300px" alt="Profile_image">
+                            <img src="{% static profile.profile_imageURL %}" width="300px" alt="Profile_image">
                         </div>
                         <div class="col-md-6">
                             <p class="p-2">名字 : &nbsp;{{profile.first_name}}</p>

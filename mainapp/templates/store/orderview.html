@@ -1,4 +1,5 @@
 {% extends 'store/layouts/main.html' %}
+{% load static %}
 {% block title %}Orderview{% endblock title %}
 {% block css %}
 <style>
@@ -87,7 +88,7 @@
                                     {% for item in orderitems %}
                                     <tr class="td-display">
                                         <td>
-                                            <img src="{{item.product.product_image.url}}" class="me-2" height="50px" width="50px" alt="Image product">
+                                            <img src="{% static item.product.product_imageURL %}" class="me-2" height="50px" width="50px" alt="Image product">
                                             <span class="ms-2" style="color: blue;">{{item.product.name}}</span>
                                         </td>
                                         <td class="text-center align-middle">{{item.price}} 元</td>

@@ -1,4 +1,5 @@
 {% extends 'store/layouts/main.html' %}
+{% load static %}
 {% block title %}Collectionsview{% endblock title %}
 
 {% block content %}
@@ -21,7 +22,7 @@
                         <a href="{% url 'productview' item.category.slug item.slug %}">
                             <div class="card-body">
                                 <div class="category-image">
-                                    <img src="{{item.product_imageURL}}" height="280px" class="w-100" alt="product image">
+                                    <img src="{% static item.product_imageURL %}" height="280px" class="w-100" alt="product image">
                                 </div>
                                 <h4 class="text-center mt-2">{{item.name}}</h4>
                                 <span class="float-start"><s>$ {{item.original_price}}</s></span>

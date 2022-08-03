@@ -1,4 +1,5 @@
 {% extends 'store/layouts/main.html' %}
+{% load static %}
 {% block title %}Cart{% endblock title %}
 {% block css %}
 <style>
@@ -25,7 +26,7 @@
                         {% for item in cart %}
                             <div class="row mb-2 product_data">
                                 <div class="col-md-2 my-auto">   <!-- my-auto 上下置中 -->
-                                    <img src="{{item.product.product_image.url}}" height="70px" width="70px" alt="Image product">
+                                    <img src="{% static item.product.product_imageURL %}" height="70px" width="70px" alt="Image product">
                                 </div>
                                 <div class="col-md-3 my-auto">
                                     <h6>{{item.product.name}}</h6>
