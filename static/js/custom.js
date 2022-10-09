@@ -33,8 +33,7 @@ $(document).ready(function () {
         value = isNaN(value) ? 0: value;
         if(value < 10) {
             value++;
-            $(this).closest('.product_data').find('.qty-input').val(value);
-            location.reload()
+            $('.qty-input').val(value);
         }
     });
 
@@ -47,7 +46,6 @@ $(document).ready(function () {
         if(value > 1) {
             value--;
             $(this).closest('.product_data').find('.qty-input').val(value);
-            location.reload()
         }
     });
     
