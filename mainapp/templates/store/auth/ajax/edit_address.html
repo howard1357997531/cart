@@ -1,0 +1,21 @@
+<style>
+    h1 { margin-left: 175px;}
+    .table-borderless input[type="text"],
+    .table-borderless input[type="email"] {
+        width: 90%;
+    }
+</style>
+<div class="modal-header text-center">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">資料修改</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <table class="table table-borderless">
+            {{form.as_table}}
+        </table>
+        
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+    <button type="submit" class="btn btn-primary">送出</button>
+</div>

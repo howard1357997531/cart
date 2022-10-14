@@ -7,6 +7,7 @@ from django.contrib import messages
 from mainapp.models import Profile
 from mainapp.forms import RegisterForm, ProfileForm
 
+
 @redirect_authenticated_user
 def register(request):
     form = RegisterForm()
@@ -15,8 +16,9 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, '建立帳號成功')
-            return redirect('login')
+            return redirect('login2')
     return render(request, 'store/auth/register.html', locals())
+
 
 @redirect_authenticated_user
 def login(request):
@@ -25,7 +27,7 @@ def login(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            if user.is_active:  
+            if user.is_active:
                 auth.login(request, user)
                 messages.success(request, '歡迎登入 ! !')
                 return redirect('home')
@@ -40,24 +42,27 @@ def login(request):
 def logout(request):
     if request.user.is_authenticated:
         auth.logout(request)
-        messages.success(request,'已登出')
+        messages.success(request, '已登出')
         return redirect('home')
+
 
 @login_required
 def profile(request):
     profile = Profile.objects.get(user=request.user)
-    return render(request,'store/auth/profile.html',locals())
+    return render(request, 'store/auth/profile.html', locals())
+
 
 @login_required
 def profile_setting(request):
     profile = Profile.objects.get(user=request.user)
     form = ProfileForm(instance=request.user.profile)
-    
+
     if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        form = ProfileForm(request.POST, request.FILES,
+                           instance=request.user.profile)
         if form.is_valid():
             form.save()
-            messages.success(request,'個人資料修改成功 ! !')
+            messages.success(request, '個人資料修改成功 ! !')
             return redirect('profile')
-    
-    return render(request,'store/auth/profile_setting.html',locals())
+
+    return render(request, 'store/auth/profile_setting.html', locals())

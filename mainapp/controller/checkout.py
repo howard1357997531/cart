@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from mainapp.models import Cart, Order, OrderItem, Product, Profile
+from mainapp.models import Addressbook, Cart, Order, OrderItem, Product, Profile
 from django.contrib import messages
 from smtplib import SMTP, SMTPAuthenticationError, SMTPException
 from email.mime.text import MIMEText
@@ -11,6 +11,8 @@ import random
 @login_required
 def checkout(request):
     profile = Profile.objects.get(user=request.user)
+    address = Addressbook.objects.filter(
+        user=request.user.profile, status=True).first()
     cart = Cart.objects.filter(user=request.user.profile)
     for item in cart:
         if item.product_qty > item.product.quantity:

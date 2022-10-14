@@ -1,0 +1,103 @@
+{% extends 'store/layouts/main.html' %}
+{% load static %}
+{% block title %}address_book{% endblock title %}
+{% block css %}
+<style>
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="container mt-3">
+    <h3 class="border-bottom my-4 pb-1 text-center">通訊錄
+        <a href="{% url 'add_address_book' %}" class="float-end btn btn-success btn-sm"><i class="fa fa-plus"></i></a>
+    </h3>
+    <div class="row">
+        <div class="col-md-3">
+            {% include 'store/auth/dash_siderbar.html' %}
+        </div>
+        <div class="col-md-9">
+            <div class="row addContent">
+                {% for add in address %}
+                <div class="col-md-4">
+                    <div class="card mb-3 {% if add.status %}shadow border-danger{% endif %}
+                    addcard addcard{{add.id}}">
+                        <div class="card-body" style="overflow-y: auto; height: 260px">
+                            <p>姓 : {{add.last_name}}</p>
+                            <p>名 : {{add.first_name}}</p>
+                            <p>電話 : 
+                                {% if add.phone %}
+                                    {{add.phone}}
+                                {% else %}
+                                    &nbsp; 請輸入電話號碼...
+                                {% endif %}
+                            </p>
+                            <p>住址 : 
+                                {% if add.address %}
+                                    {{add.address}}
+                                {% else %}
+                                    &nbsp; 請輸入地址...
+                                {% endif %}
+                            </p>
+                            <p>信箱 : {{add.email}}</p>
+                        </div>
+                        {% if add.status %}
+                        <div class="card-footer add" data-id="{{add.id}}">
+                            <i class="fa fa-check-circle text-danger addicon addicon{{add.id}} p-2"></i>
+                            <button class="btn btn-danger btn-sm mt-1 activateBtn activateBtn{{add.id}}" data-id="{{add.id}}" style="display: none;">激活</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn float-end addEdit" data-id="{{add.id}}" data-bs-toggle="modal" data-bs-target="#exampleModal{{add.id}}">
+                                <i class="fa fa-edit "></i>
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{add.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{% url 'save_address' add.id %}" method="POST" class='addForm'>
+                                            {% csrf_token %}
+                                            <div class="form-content">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="card-footer add" >
+                            <i class="fa fa-check-circle text-danger addicon addicon{{add.id}} p-2" style="display: none;"></i>
+                            <button class="btn btn-danger btn-sm mt-1 activateBtn activateBtn{{add.id}}" data-id="{{add.id}}">激活</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn float-end addEdit" data-id="{{add.id}}" data-bs-toggle="modal" data-bs-target="#exampleModal{{add.id}}">
+                                <i class="fa fa-edit "></i>
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{add.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{% url 'save_address' add.id %}" method="POST" class='addForm'>
+                                            {% csrf_token %}
+                                            <div class="form-content">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+
+{% block scripts %}
+<script type="">
+    {% for message in messages %}
+        alertify.success('{{message}}');
+    {% endfor %}
+</script>
+{% endblock scripts %}
+

@@ -12,28 +12,21 @@
     }
 
     .check-height {
-        height: 400px;
+        height: 300px;
         overflow-y: auto;
     }
 </style>
 {% endblock css %}
 {% block content %}
-<div class="py-3 bg-info">
-    <div class="container">
-        <a class="text-white" href="{% url 'home' %}">首頁 &nbsp;/ &nbsp;</a>
-        <a class="text-white" href="{% url 'my_order' %}">我的訂單 &nbsp;/ &nbsp;</a>
-        <a class="text-white" href="{% url 'orderview' order.tracking_num %}">訂單查詢</a>
-    </div>
-</div>
-<div class="container mt-4">
+<div class="container mt-3">
+    <a href="{% url 'my_order' %}" class="btn btn-warning btn-sm float-end"><i class="fa fa-reply"></i> 返回</a>
+    <h3 class="border-bottom my-4 pb-1 text-center">訂單查詢</h3>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3">
+            {% include 'store/auth/dash_siderbar.html' %}
+        </div>
+        <div class="col-md-9">
             <div class="card shadow">
-                <div class="card-header">
-                    <h3 class="mb-0 text-center">
-                        訂單查詢<a href="{% url 'my_order' %}" class="btn btn-warning float-end"><i class="fa fa-reply"></i> 返回</a>
-                    </h3>
-                </div> 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -74,31 +67,33 @@
                                 <label for="floatingTextarea">訊息(有特殊狀況會流言在此)</label>
                               </div>
                         </div>
-                        <div class="col-md-6 check-height">
-                            <table class="table table-bordereds">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>名稱</th>
-                                        <th>單價</th>
-                                        <th>數量</th>
-                                        <th>合計</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for item in orderitems %}
-                                    <tr class="td-display">
-                                        <td>
-                                            <img src="{% static item.product.product_imageURL %}" class="me-2" height="50px" width="50px" alt="Image product">
-                                            <span class="ms-2" style="color: blue;">{{item.product.name}}</span>
-                                        </td>
-                                        <td class="text-center align-middle">{{item.price}} 元</td>
-                                        <td class="text-center align-middle">{{item.quantity}}</td>
-                                        <td class="text-center align-middle">{{item.item_totalprice}} 元</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <h4 class="px-2">總價 <span class="float-end"><span style="color: red;">{{order.total_price}}</span> 元</span></h4>
+                        <div class="col-md-6">
+                            <div class="check-height">
+                                <table class="table table-bordereds">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>名稱</th>
+                                            <th>單價</th>
+                                            <th>數量</th>
+                                            <th>合計</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in orderitems %}
+                                        <tr class="td-display">
+                                            <td>
+                                                <img src="{% static item.product.product_imageURL %}" class="me-2" height="50px" width="50px" alt="Image product">
+                                                <span class="ms-2" style="color: blue;">{{item.product.name}}</span>
+                                            </td>
+                                            <td class="text-center align-middle">{{item.price}} 元</td>
+                                            <td class="text-center align-middle">{{item.quantity}}</td>
+                                            <td class="text-center align-middle">{{item.item_totalprice}} 元</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h4 class="mt-4">總價 <span class="float-end"><span style="color: red;">{{order.total_price}}</span> 元</span></h4>
                         </div>
                     </div>
                 </div>
@@ -106,6 +101,7 @@
         </div>
     </div>
 </div>
+
 
 {% endblock content %}
 

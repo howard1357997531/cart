@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg bg-light" id="item_count">
     <div class="container">
       <a class="navbar-brand" href="{% url 'home' %}">購物網</a>
@@ -46,15 +47,19 @@
               {{request.user}}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'profile' %}">基本資料</a></li>
-              <li><a class="dropdown-item" href="{% url 'my_order' %}">我的訂單</a></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'profile' %}">
+                  <img src="{% static profile.profile_imageURL %}" width="25" height="25" style="border-radius: 50%;">
+                    &nbsp;{{profile.last_name}}{{profile.first_name}}
+                </a>
+              </li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{% url 'logout' %}">登出</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout2' %}">登出</a></li>
             </ul>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">登入</a>
+            <a class="nav-link" href="{% url 'login2' %}">登入</a>
           </li>
           {% endif  %}
         </ul>

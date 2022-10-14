@@ -33,8 +33,7 @@ $(document).ready(function () {
         value = isNaN(value) ? 0: value;
         if(value < 10) {
             value++;
-            $(this).closest('.product_data').find('.qty-input').val(value);
-            location.reload()
+            $('.qty-input').val(value);
         }
     });
 
@@ -47,7 +46,6 @@ $(document).ready(function () {
         if(value > 1) {
             value--;
             $(this).closest('.product_data').find('.qty-input').val(value);
-            location.reload()
         }
     });
     
@@ -118,6 +116,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response)
+                location.reload()
                 //alertify.success(response.status)
             }
         }); 
@@ -171,6 +170,63 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click','.activateBtn', function () {
+        let card_id = $(this).attr('data-id');
+        $.ajax({
+            url: "/acticate_address",
+            data: {
+                'id' : card_id
+            },
+            dataType: "json",
+            success: function (res) {
+                if(res.bool == true) {
+                    $('.addicon').hide();
+                    $('.addicon' + card_id).show();
+
+                    $('.activateBtn').show();
+                    $('.activateBtn' + card_id).hide();
+
+                    $('.addcard').removeClass('shadow border-danger');
+                    $('.addcard' + card_id).addClass('shadow border-danger');
+
+                }
+            }
+        });
+    });
+
+    $(document).on('click','.addEdit', function () {
+        let card_id = $(this).attr('data-id');
+        
+        $.ajax({
+            url: "/edit_address",
+            data: {
+                'id' : card_id
+            },
+            dataType: "json",
+            success: function (res) {
+                $('.form-content').html(res.data);
+            }
+        });
+    });
+
+    $('.addForm').submit(function (e) { 
+        console.log($(this).serialize())
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (res) {
+                if(res.bool == true) {
+                    $('.modal').modal('hide');
+                    location.reload()
+                    //$('.addContent').load(location.href + ' .addContent');
+                }
+            }
+        });
+        e.preventDefault();
+        
+    });
     
 });
 

@@ -1,0 +1,48 @@
+{% extends 'store/layouts/main.html' %}
+{% load static %}
+{% block title %}add_address_book{% endblock title %}
+{% block css %}
+<style>
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="container mt-3">
+    <a href="{% url 'address_book' %}" class="btn btn-warning btn-sm float-end"><i class="fa fa-reply"></i> 返回</a>
+    <h3 class="border-bottom my-4 pb-1 text-center">新增通訊錄</h3>
+    
+    <div class="row">
+        <div class="col-md-3">
+            {% include 'store/auth/dash_siderbar.html' %}
+        </div>
+        <div class="col-md-9">
+            <div class="row ">
+                <div class="col-md-6" style="margin: auto;">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <table class="table table-borderless">
+                            {{form.as_table}}
+                        <tr >
+                            <td colspan="2">
+                                <input type="submit" value="送出" class="btn btn-success btn-sm float-end">
+                            </td>
+                        </tr>
+                        </table>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+
+{% block scripts %}
+<script type="">
+    {% for message in messages %}
+        alertify.success('{{message}}');
+    {% endfor %}
+</script>
+{% endblock scripts %}
+

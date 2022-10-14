@@ -40,23 +40,23 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label>姓氏</label>
-                                <input type="text" class="form-control" name="last_name" placeholder="輸入姓名" value="{{profile.last_name}}" required>
+                                <input type="text" class="form-control" name="last_name" placeholder="輸入姓名" value="{{address.last_name}}" required>
                             </div>
                             <div class="col-md-6">
                                 <label>名字</label>
-                                <input type="text" class="form-control" name="first_name" placeholder="輸入名字" value="{{profile.first_name}}" required>
+                                <input type="text" class="form-control" name="first_name" placeholder="輸入名字" value="{{address.first_name}}" required>
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label>電話</label>
-                                <input type="text" class="form-control" name="phone" placeholder="輸入電話" {% if profile.phone %}value="{{profile.phone}}"{% endif %} required>
+                                <input type="text" class="form-control" name="phone" placeholder="輸入電話" {% if address.phone %}value="{{address.phone}}"{% endif %} required>
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label>電子郵件</label>
-                                <input type="email" class="form-control" name="email" placeholder="輸入電子郵件" value="{{profile.email}}" required>
+                                <input type="email" class="form-control" name="email" placeholder="輸入電子郵件" value="{{address.email}}" required>
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label>住址</label>
-                                <input type="text" class="form-control" name="address" placeholder="輸入地址" {% if profile.address %}value="{{profile.address}}"{% endif %} required>
+                                <input type="text" class="form-control" name="address" placeholder="輸入地址" {% if address.address %}value="{{address.address}}"{% endif %} required>
                             </div>
                         </div>
 

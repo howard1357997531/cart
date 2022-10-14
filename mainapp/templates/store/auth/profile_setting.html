@@ -4,47 +4,32 @@
 {% block title %}Profile_setting{% endblock title %}
 {% block css %}
 <style>
-    label {
-        font-size: 16px;
-        display: inline-block;
-    }
-    input {
-        margin: 10px 0;
+    .form label {
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 </style>
 {% endblock css%}
 {% block content %}
-<div class="py-3 bg-info">
-    <div class="container">
-        <a class="text-white" href="{% url 'home' %}">首頁 &nbsp;/ &nbsp;</a>
-        <a class="text-white" href="{% url 'profile' %}">個人資料設定 &nbsp;/ &nbsp;</a>
-        <a class="text-white" href="{% url 'profile_setting' %}">個人資料修改</a>
-    </div>
-</div>
-<div class="container mt-4">
+<div class="container mt-3">
+    <a href="{% url 'profile' %}" class="btn btn-warning btn-sm float-end"><i class="fa fa-reply"></i> 返回</a>
+    <h3 class="border-bottom my-4 pb-1 text-center">個人資料修改</h3>
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-3">
+            {% include 'store/auth/dash_siderbar.html' %}
+        </div>
+        <div class="col-md-9">
             <div class="card shadow">
-                <div class="card-header">
-                    <h3 class="mb-0 text-center">
-                        個人資料修改
-                        <button class="btn btn-warning float-end" onclick="window.history.back()">
-                            <i class="fa fa-reply"></i> 返回
-                        </button>
-                    </h3>
-                </div> 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 text-center py-5">
                             <img src="{% static profile.profile_imageURL %}" class="align-middle" width="300px" alt="Profile_image">
                         </div>
-                        <div class="col-md-6">
-                            <form action="." method="POST" enctype="multipart/form-data">
+                        <div class="col-md-6 form">
+                            <form action="{% url 'profile_setting' %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{form|crispy}}
-                                <button type="submit" class="btn btn-success float-end mt-2 w-25">
-                                    修改
-                                </button>
+                                <input type="submit" class="btn btn-success float-end mt-2 w-25" value="修改">
                             </form>
                         </div>
                     </div>
@@ -54,10 +39,11 @@
     </div>
 </div>
 
+
 <script>
     let label = document.getElementsByTagName('label')
-    label[0].innerHTML = '名字 :'
-    label[1].innerHTML = '姓氏 :'
+    label[0].innerHTML = '姓氏 :'
+    label[1].innerHTML = '名字 :'
     label[2].innerHTML = '電話 :'
     label[3].innerHTML = '地址 :'
     label[4].innerHTML = '電子郵件 :'

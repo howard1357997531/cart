@@ -10,20 +10,16 @@
 {% endblock css %}
 
 {% block content %}
-<div class="py-3 bg-info">
-    <div class="container">
-        <a class="text-white" href="{% url 'home' %}">首頁 &nbsp;/ &nbsp;</a>
-        <a class="text-white" href="{% url 'my_order' %}">我的訂單</a>
-    </div>
-</div>
-<div class="container mt-4">
+<div class="container mt-3">
+    <h3 class="border-bottom my-4 pb-1 text-center">訂單查詢</h3>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3">
+            {% include 'store/auth/dash_siderbar.html' %}
+        </div>
+        <div class="col-md-9">
             <div class="card shadow">
-                <div class="card-header">
-                    <h3 class="mb-0 text-center">訂單查詢</h3>
-                </div>
                 <div class="card-body order-height">
+                    {% if orders %}
                     <table class="table table-bordered">
                         <thead>
                             <tr class="text-center">
@@ -49,11 +45,16 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% else %}
+                    <h2 class="text-center text-danger" style="margin-top: 200px;">尚無訂單 ~</h2>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
+    
+
 
 {% endblock content %}
 

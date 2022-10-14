@@ -3,32 +3,22 @@
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
-<div class="py-3 bg-info">
-    <div class="container">
-        <a class="text-white" href="{% url 'home' %}">首頁 &nbsp;/ &nbsp;</a>
-        <a class="text-white" href="{% url 'profile' %}">個人資料設定</a>
-    </div>
-</div>
-<div class="container mt-4">
+<div class="container mt-3">
+    <h3 class="border-bottom my-4 pb-1 text-center">個人資料</h3>
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-3">
+            {% include 'store/auth/dash_siderbar.html' %}
+        </div>
+        <div class="col-md-9">
             <div class="card shadow">
-                <div class="card-header">
-                    <h3 class="mb-0 text-center">
-                        個人資料
-                        <a href="{% url 'home' %}" class="btn btn-warning float-end">
-                            <i class="fa fa-reply"></i> 返回
-                        </a>
-                    </h3>
-                </div> 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 text-center">
                             <img src="{% static profile.profile_imageURL %}" width="300px" alt="Profile_image">
                         </div>
                         <div class="col-md-6">
-                            <p class="p-2">名字 : &nbsp;{{profile.first_name}}</p>
                             <p class="p-2">姓氏 : &nbsp;{{profile.last_name}}</p>
+                            <p class="p-2">名字 : &nbsp;{{profile.first_name}}</p>
                             <p class="p-2">電話 : {% if profile.phone %}&nbsp;{{profile.phone}}{% endif%}</p>
                             <p class="p-2">住址 : {% if profile.address %}&nbsp;{{profile.address}}{% endif%}</p>
                             <p class="p-2">電子郵件 : &nbsp;{{profile.email}}</p>

@@ -30,6 +30,7 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('password_reset_complete/', PasswordResetCompleteView.as_view(template_name='store/auth/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('account/', include('django.contrib.auth.urls'))
 ]
 
 if settings.DEBUG:

@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ade8v=*vo@j2j=p3_8b%huwe8xsfp23052!n!xt5bvn0ny+&7o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'mainapp',
     'jazzmin',    # pip install django-jazzmin    admin優化
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mainapp',
     'crispy_forms'
 ]
 
@@ -131,7 +131,16 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = BASE_DIR / 'static/images'  # 實際存的地方(照片存在電腦的位置)
 
-LOGIN_URL = 'login'
+# 在沒登入的情況下想用url的方式強行進入需要登入的頁面，會redirect到的地方
+LOGIN_URL = 'login2'
+
+# ---------------------------------
+# 在urls.py設定後內建redirect的地方
+# 登入會到的地方
+LOGIN_REDIRECT_URL = 'home'
+# 登出會到的地方
+LOGOUT_REDIRECT_URL = 'home'
+# ---------------------------------
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
