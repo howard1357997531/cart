@@ -61,7 +61,7 @@
                                         </button>
                                     {% endif %}
                                     {% if not hasitem_in_cart %} <!-- 如果商品在cart裡不顯示 -->
-                                    <button type="button" class="btn btn-success mt-2 addToWishlist">
+                                    <button type="button" class="btn btn-success mt-2 addToWishlist" data-id="{{products.id}}">
                                         加入願望清單 <i class="fa fa-heart"></i>
                                     </button> 
                                     {% endif %}

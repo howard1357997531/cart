@@ -56,7 +56,7 @@ def productview(request, cate_slug, prod_slug):
 
 
 def productlistAjax(request):  # search_product用
-    # products = Product.objects.filter(status=0)                                回傳 <QuerySet [<Product: 香蕉>, <Product: 蘋果>]>
+    # products = Product.objects.filter(status=0)   回傳 <QuerySet [<Product: 香蕉>, <Product: 蘋果>]>
     products = Product.objects.filter(status=0).values_list(
         'name', flat=True)  # 回傳 <QuerySet ['香蕉', '蘋果']>
     productslist = list(products)  # 把 QuerySet 轉成 list

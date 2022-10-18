@@ -77,7 +77,7 @@ $(document).ready(function () {
     $(document).on('click','.addToWishlist', function (e) {
         e.preventDefault();
         
-        var product_id = $(this).closest('.product_data').find('.prod_id').val();
+        var product_id = $(this).data('id');
         var token = $('input[name=csrfmiddlewaretoken]').val();
         
         $.ajax({
