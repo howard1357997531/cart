@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'crispy_forms'
 ]
 
+# Railway
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = ['https://web-production-2ef1.up.railway.app']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -149,7 +153,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'gary8211213@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 
 # Default primary key field type

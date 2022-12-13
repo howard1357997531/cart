@@ -119,6 +119,7 @@ def add_address_book(request):
         if form.is_valid():
             saveform = form.save(commit=False)
             saveform.user = request.user.profile
+            print(request.POST)
             if 'status' in request.POST:
                 Addressbook.objects.filter(
                     user=request.user.profile).update(status=False)

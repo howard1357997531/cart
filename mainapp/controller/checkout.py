@@ -65,7 +65,7 @@ def placeorder(request):
             orderproduct.quantity -= item.product_qty
             orderproduct.save()
 
-        mailfrom = ''
+        mailfrom = 'gary8211213@gmail.com'
         mailpw = ''
         mailto = request.POST.get('email')
         mailsubject = '購物數位通知網 - 訂單通知'

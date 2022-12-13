@@ -55,7 +55,7 @@ def profile(request):
 @login_required
 def profile_setting(request):
     profile = Profile.objects.get(user=request.user)
-    form = ProfileForm(instance=request.user.profile)
+    form = ProfileForm(instance=profile)
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES,
